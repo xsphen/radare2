@@ -4,6 +4,7 @@ MAKE=make
 gmake --help >/dev/null 2>&1
 [ $? = 0 ] && MAKE=gmake
 
+export USE_CS4=0
 # if owner of sys/install.sh != uid && uid == 0 { exec sudo -u id -A $SUDO_UID sys/install.sh $* }
 ARGS=""
 while : ; do
@@ -16,7 +17,7 @@ while : ; do
 		echo
 		exit 0
 		;;
-	"--with-capstone5")
+	"--with-capstone4")
 		export USE_CS5=1
 		rm -rf shlr/capstone
 		shift
