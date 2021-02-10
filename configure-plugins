@@ -144,11 +144,13 @@ generate_configmk () {
 generate () {
   echo "configure-plugins: Generating libr/config.h"
   cat libr/config.h.head > libr/config.h
+
   echo "#define R2_LOADLIBS ${LOADLIBS}" >> libr/config.h
   generate_configh >> libr/config.h
+  cat libr/config.h.tail >> libr/config.h
+
   echo "configure-plugins: Generating libr/asm/d/config.inc"
   generate_asmdinc >> libr/asm/d/config.inc
-  cat libr/config.h.tail >> libr/config.
 
   echo "configure-plugins: Generating libr/config.mk"
   cat libr/config.mk.head > libr/config.mk

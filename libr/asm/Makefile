@@ -13,20 +13,19 @@ LDFLAGS+=${CS_LDFLAGS}
 include $(STOP)/java/deps.mk
 include $(STOP)/capstone.mk
 
-.PHONY: all plugins
+.PHONY: alle plugins
 
-EXTRA_CLEAN=doclean
-
-all: plugins
-
-doclean:
-	@cd d && ${MAKE} clean
-	@cd p && ${MAKE} clean
-	rm -f `find arch/| grep '\.o$$'`
-
-plugins: ${LIBSO} ${LIBAR}
+alle:
 	${MAKE} -C d all
 	${MAKE} -C p all
+	${MAKE} $(LIBSO)
+	${MAKE} $(LIBAR)
+
+EXTRA_CLEAN=doclean
+$(EXTRA_CLEAN):
+	$(MAKE) -C d clean
+	$(MAKE) -C p clean
+	rm -f `find arch/| grep '\.o$$'`
 
 include ${STATIC_ASM_PLUGINS}
 STATIC_OBJS=$(subst ..,p/..,$(subst asm_,p/asm_,$(STATIC_OBJ)))
